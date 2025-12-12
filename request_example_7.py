@@ -46,24 +46,42 @@ print(f"Середнє арефметичне добутків чисел: {aver
 
 print("\n"+"дргуй таск:")
 
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
 class Passager_Queue:
     def __init__(self):
-        self.__queue = []
+        self.__head = None
 
     def new_passager_in_queue(self, new_passager):
-        """додавання нового пасажира"""
-        self.__queue.append(new_passager)
+        """додати пасажира в чергу"""
+        new_node = Node(new_passager)
+        if self.__head == None:
+            self.__head = new_node
+        else:
+            current = self.__head
+            while current.next is not None:
+                current = current.next
+            current.next = new_node
 
     def to_sit(self):
-        """функція для провірки чи черга не пуста і розсадки пасажирів"""
-        if len(self.__queue) > 0:
-            sitting_passager = self.__queue
+        """розсадка пасажирів"""
+        if self.__head is not None:
+            sitting_passager = self.__head.data
+            self.__head = self.__head.next
             return sitting_passager
         return None
 
     def show_queue(self):
-        for i in range(len(self.__queue)):
-            print(f"Місце в черзі {i + 1}: {self.__queue[i]}")
+        """показати чергу пасажирів"""
+        current = self.__head
+        place = 1
+        while current is not None:
+            print(f"Місце в черзі {place}: {current.data}")
+            current = current.next
+            place += 1
 
 bus_station = Passager_Queue()
 
@@ -73,8 +91,9 @@ bus_station.new_passager_in_queue("Вінстон Уітмен")
 
 print("Черга пасажирів:")
 bus_station.show_queue()
+
 bus_station.to_sit()
+
 print("\n"+"Після того, як пасажир сів:")
 bus_station.show_queue()
-
 
