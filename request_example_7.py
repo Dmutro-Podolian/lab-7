@@ -1,4 +1,3 @@
-print("перший таск:")
 matrix = [[19, 62, -45, -1, 84],[23, 54, -4, -2, 68],[36, 39, 96, 94, 97],[-3, -8, -4, -6, -22],[98, -5, -3, 0, 11]]
 
 def sort_matrix(matrix):
@@ -35,17 +34,7 @@ def average_underline(product_of_numbers):
     for el in product_of_numbers:
         sum += el
     return int(sum/len(product_of_numbers))
-
-sorted_matrix = sort_matrix(matrix)
-product_of_numbers = product_underline(sorted_matrix)
     
-for i in sorted_matrix:
-    print(i)
-print(f"Список добутків чисел: {product_of_numbers}")
-print(f"Середнє арефметичне добутків чисел: {average_underline(product_of_numbers)}")
-
-print("\n"+"дргуй таск:")
-
 class Node:
     def __init__(self, data):
         self.data = data
@@ -83,17 +72,29 @@ class Passager_Queue:
             current = current.next
             place += 1
 
-bus_station = Passager_Queue()
+if __name__ == "__main__":
+    print("перший таск:")
+    sorted_matrix = sort_matrix(matrix)
+    product_of_numbers = product_underline(sorted_matrix)
 
-bus_station.new_passager_in_queue("Енакін Скайвокер")
-bus_station.new_passager_in_queue("Шарлотта Вайлтшайр")
-bus_station.new_passager_in_queue("Вінстон Уітмен")
+    for i in sorted_matrix:
+        print(i)
+    print(f"Список добутків чисел: {product_of_numbers}")
+    print(f"Середнє арефметичне добутків чисел: {average_underline(product_of_numbers)}")
 
-print("Черга пасажирів:")
-bus_station.show_queue()
+    print("\n"+"дргуй таск:")
 
-bus_station.to_sit()
+    bus_station = Passager_Queue()
 
-print("\n"+"Після того, як пасажир сів:")
-bus_station.show_queue()
+    bus_station.new_passager_in_queue("Енакін Скайвокер")
+    bus_station.new_passager_in_queue("Шарлотта Вайлтшайр")
+    bus_station.new_passager_in_queue("Вінстон Уітмен")
+
+    print("Черга пасажирів:")
+    bus_station.show_queue()
+    bus_station.to_sit()
+    print("\n"+"Після того, як пасажир сів:")
+    bus_station.show_queue()
+
+
 
