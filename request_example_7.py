@@ -1,8 +1,8 @@
 print("перший таск:")
 matrix = [[19, 62, -45, -1, 84],[23, 54, -4, -2, 68],[36, 39, 96, 94, 97],[-3, -8, -4, -6, -22],[98, -5, -3, 0, 11]]
 
-"""сортування матриці"""
 def sort_matrix(matrix):
+    """сортування матриці"""
     for rows in matrix: 
         for i in range(len(rows)):
             not_swapped = True
@@ -14,8 +14,8 @@ def sort_matrix(matrix):
                 break
     return matrix
 
-"""добуток членів під головною діагоналю"""
 def product_underline(sorted_matrix):
+    """добуток членів під головною діагоналю"""
     list_of_products = []
     i = 1
     for rows in sorted_matrix:
@@ -29,18 +29,16 @@ def product_underline(sorted_matrix):
         i += 1
     return list_of_products
 
-"""середнє арефметичне добутків"""
 def average_underline(product_of_numbers):
+    """середнє арефметичне добутків"""
     sum = 0
     for el in product_of_numbers:
         sum += el
     return int(sum/len(product_of_numbers))
 
-"""виклики функцій"""
 sorted_matrix = sort_matrix(matrix)
 product_of_numbers = product_underline(sorted_matrix)
     
-"""вивід результатів в консоль"""
 for i in sorted_matrix:
     print(i)
 print(f"Список добутків чисел: {product_of_numbers}")
@@ -48,51 +46,35 @@ print(f"Середнє арефметичне добутків чисел: {aver
 
 print("\n"+"дргуй таск:")
 
-"""клас для створення пасажира"""
-class Pasanger:
-    def __init__(self, name, age, time_when_came):
-        self.name = name
-        self.age = age
-        self.time_when_came = time_when_came
+class Passager_Queue:
+    def __init__(self):
+        self.__queue = []
 
-    def get_info(self):
-        return f"Ім'я і прізвище: {self.name}, Вік: {self.age}"
-    
-    def get_time_when_came(self):
-        return self.time_when_came
+    def new_passager_in_queue(self, new_passager):
+        """додавання нового пасажира"""
+        self.__queue.append(new_passager)
 
-"""функція для створення списку з пасажирів"""
-def main():
-    passenger1 = Pasanger("Енакін Скайвокер", 45, "10.00")
-    passenger2 = Pasanger("Астольфо Аргалій", 195, "10.30")
-    passenger3 = Pasanger("Вінстон Уітмен ", 30, "9.45")
-    passenger4 = Pasanger("Шарлотта Вайлтшайр ", 15, "00.00")
+    def to_sit(self):
+        """функція для провірки чи черга не пуста і розсадки пасажирів"""
+        if len(self.__queue) > 0:
+            sitting_passager = self.__queue
+            return sitting_passager
+        return None
 
-    return passenger1, passenger2, passenger3, passenger4
+    def show_queue(self):
+        for i in range(len(self.__queue)):
+            print(f"Місце в черзі {i + 1}: {self.__queue[i]}")
 
-"""запис всіх пасажирів в список"""
-list_of_passengers = main()
+bus_station = Passager_Queue()
 
-"""функція для розсадки пасажирів в порядку їх прибутя"""
-def seating_arrangement(list_of_passengers):
-    passengers = list(list_of_passengers)  
-    n = len(passengers)
-    
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if float(passengers[j].get_time_when_came()) > float(passengers[j + 1].get_time_when_came()):
-                passengers[j], passengers[j + 1] = passengers[j + 1], passengers[j]
-    
-    return passengers
-                
-"""запис відсортованих пасажирів в список"""
-seating_list = seating_arrangement(list_of_passengers)
+bus_station.new_passager_in_queue("Енакін Скайвокер")
+bus_station.new_passager_in_queue("Шарлотта Вайлтшайр")
+bus_station.new_passager_in_queue("Вінстон Уітмен")
 
-"""присвоєння номера місця, і вивід пасажирів в консоль"""
-sit_number = 1
-for i in seating_list:
-    print(i.get_info() + f" прийшов о: {i.get_time_when_came()}" + f" місце: {sit_number}")
-    sit_number+=1
-
+print("Черга пасажирів:")
+bus_station.show_queue()
+bus_station.to_sit()
+print("\n"+"Після того, як пасажир сів:")
+bus_station.show_queue()
 
 
